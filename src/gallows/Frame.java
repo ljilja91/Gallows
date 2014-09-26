@@ -23,15 +23,12 @@ public class Frame extends JFrame
     
     private MenuBar meni;
     private JPanel mainPanel;
-    private Font customFont = null;
     private BaseClass base;
     
     
-    public Frame(Font font)
+    public Frame()
     {
         base = new BaseClass();
-        
-        this.customFont = font;
         
         createLeftUpPanel();
         
@@ -52,12 +49,12 @@ public class Frame extends JFrame
     
     private void createDownPanel() 
     {
-        downPanel = new DownPanel(customFont, base, this.upPanel);
+        downPanel = new DownPanel(base, this.upPanel);
     }
 
     private void createLeftUpPanel() 
     {
-        upPanel = new UpPanel(customFont, base);
+        upPanel = new UpPanel(base);
     }
 
     private void createMainPanel() 

@@ -23,7 +23,7 @@ public class UpPanel
     
     private MenuBar myMenubar;
     
-    public UpPanel(Font font, BaseClass base)
+    public UpPanel(BaseClass base)
     {
     }
 

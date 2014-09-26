@@ -12,13 +12,11 @@ public class DownPanel
 {
     private JPanel downPanel = new JPanel();
     private UpPanel upPanel;
-    private Font font;
     private BaseClass base;
   
     
-    public DownPanel(Font font, BaseClass base, UpPanel upPanel)
+    public DownPanel(BaseClass base, UpPanel upPanel)
     {
-        this.font = font;
         this.base = base;
         this.upPanel = upPanel;
     }
