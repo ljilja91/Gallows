@@ -3,9 +3,9 @@ package gallows;
 import Base.BaseClass;
 import Panels.DownPanel;
 import Panels.UpPanel;
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.MenuBar;
 import java.awt.Toolkit;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -29,8 +29,44 @@ public class Frame extends JFrame
     
     public Frame(Font font)
     {
+        base = new BaseClass();
+        
         this.customFont = font;
-        this.frameSettings();
+        
+        createLeftUpPanel();
+        
+        createDownPanel();
+        
+        meni = new MenuBar(upPanel, downPanel);
+        
+        this.upPanel.setMyMenubar(meni);
+        
+        createMainPanel(); 
+        
+        this.setJMenuBar(meni.getMeniBar());
+        
+        this.add(mainPanel);
+        
+        frameSettings();
+    }
+    
+    private void createDownPanel() 
+    {
+        downPanel = new DownPanel(customFont, base, this.upPanel);
+    }
+
+    private void createLeftUpPanel() 
+    {
+        upPanel = new UpPanel(customFont, base);
+    }
+
+    private void createMainPanel() 
+    {
+        mainPanel = new JPanel();
+        mainPanel.setPreferredSize(new Dimension(700, 550));
+        mainPanel.setLayout(new BorderLayout(5,5));
+        mainPanel.add(this.upPanel.getPanel(), BorderLayout.CENTER);
+        mainPanel.add(this.downPanel.getDownPanel(), BorderLayout.SOUTH);
     }
     
     private void frameSettings() 
