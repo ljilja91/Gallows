@@ -2,6 +2,8 @@ package gallows;
 
 import Panels.DownPanel;
 import Panels.UpPanel;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -21,7 +23,7 @@ public class MenuBar extends JMenuBar
     private JCheckBoxMenuItem jcbScientists;
     private JCheckBoxMenuItem jcbSports;
     private JCheckBoxMenuItem jcbSingers;
-    private final JMenuItem newGame;
+    private JMenuItem newGame;
     
     private int type;
 
@@ -44,11 +46,76 @@ public class MenuBar extends JMenuBar
         this.upPanel = upPanel;
         this.doPanel = downPanel;
         
-        newGame = new JMenuItem();
-        
         meniBar = new JMenuBar();
+        
+        typeGallows = new JMenu("Type Gallows");
+        
+        newGame = new JMenuItem("New Game");
+        newGame.addActionListener(new ActionListener() 
+        {
+            @Override
+            public void actionPerformed(ActionEvent e) 
+            {
+                newGameClicked();
+	    }
+	});
+        
+        typeGallows.add(newGame);
+        typeGallows.addSeparator();
+        
+        jcbScientists = new JCheckBoxMenuItem("Scientists");
+        jcbSports = new JCheckBoxMenuItem("Sports");
+        jcbSingers = new JCheckBoxMenuItem("Singers");
+        
+        jcbScientists.setSelected(true);
+        jcbScientists.addActionListener(new ActionListener() 
+        {
+            @Override
+            public void actionPerformed(ActionEvent e) 
+            {
+                chackBoxClick(e);
+            }
+        });
+        
+        
+        jcbSports.addActionListener(new ActionListener() 
+        {
+            @Override
+            public void actionPerformed(ActionEvent e) 
+            {
+                chackBoxClick(e);
+            }
+        });
+        
+        
+        jcbSingers.addActionListener(new ActionListener() 
+        {
+            @Override
+            public void actionPerformed(ActionEvent e) 
+            {
+                chackBoxClick(e);
+            }
+        });
+        
+        
+        typeGallows.add(jcbScientists);
+        typeGallows.add(jcbSports);
+        typeGallows.add(jcbSingers);
+        
+        meniBar.add(typeGallows);
     }  
 
+    private void chackBoxClick(ActionEvent e) 
+    {
+        
+    }
+    
+    public void newGameClicked()
+    {
+        
+    }
+    
+    
     /**
      * @return the jcbScientists
      */

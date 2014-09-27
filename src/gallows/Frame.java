@@ -30,13 +30,11 @@ public class Frame extends JFrame
     {
         base = new BaseClass();
         
-        createLeftUpPanel();
+        createUpPanel();
         
         createDownPanel();
         
         meni = new MenuBar(upPanel, downPanel);
-        
-        this.upPanel.setMyMenubar(meni);
         
         createMainPanel(); 
         
@@ -52,7 +50,7 @@ public class Frame extends JFrame
         downPanel = new DownPanel(base, this.upPanel);
     }
 
-    private void createLeftUpPanel() 
+    private void createUpPanel() 
     {
         upPanel = new UpPanel(base);
     }
