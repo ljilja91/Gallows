@@ -1,7 +1,11 @@
 package Panels;
 
 import Base.BaseClass;
-import java.awt.Font;
+import gallows.MenuBar;
+import java.awt.Color;
+import java.awt.Dimension;
+import static java.awt.image.ImageObserver.WIDTH;
+import javax.swing.JButton;
 import javax.swing.JPanel;
 
 /**
@@ -13,12 +17,21 @@ public class DownPanel
     private JPanel downPanel = new JPanel();
     private UpPanel upPanel;
     private BaseClass base;
-  
+    
+    private MenuBar myMenuBar;
+    
+    private int numberOfMiss=0;
     
     public DownPanel(BaseClass base, UpPanel upPanel)
     {
-        this.base = base;
+        downPanel.setBackground(Color.yellow);
+        downPanel.setMinimumSize(new Dimension(WIDTH, 160));
+        downPanel.setPreferredSize(new Dimension(WIDTH, 160));
+        
+        createButtons();
+        
         this.upPanel = upPanel;
+        this.base = base;
     }
 
     /**
@@ -35,6 +48,15 @@ public class DownPanel
         this.downPanel = downPanel;
     }
     
+    public void letterClick(JButton button)
+    {
+        
+    }
+
+    public void createButtons()
+    {
+        
+    }
 
     /**
      * @return the base
@@ -51,16 +73,30 @@ public class DownPanel
     }
 
     /**
-     * @return the upPanel
+     * @return the myMenuBar
      */
-    public UpPanel getUpPanel() {
-        return upPanel;
+    public MenuBar getMyMenuBar() {
+        return myMenuBar;
     }
 
     /**
-     * @param upPanel the upPanel to set
+     * @param myMenuBar the myMenuBar to set
      */
-    public void setUpPanel(UpPanel upPanel) {
-        this.upPanel = upPanel;
+    public void setMyMenuBar(MenuBar myMenuBar) {
+        this.myMenuBar = myMenuBar;
+    }
+
+    /**
+     * @return the numberOfMiss
+     */
+    public int getNumberOfMiss() {
+        return numberOfMiss;
+    }
+
+    /**
+     * @param numberOfMiss the numberOfMiss to set
+     */
+    public void setNumberOfMiss(int numberOfMiss) {
+        this.numberOfMiss = numberOfMiss;
     }
 }

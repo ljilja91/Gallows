@@ -35,6 +35,8 @@ public class Frame extends JFrame
         
         meni = new MenuBar(upPanel, downPanel);
         
+        this.downPanel.setMyMenuBar(meni);
+        
         createMainPanel(); 
         
         this.setJMenuBar(meni.getMeniBar());
