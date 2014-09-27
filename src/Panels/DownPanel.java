@@ -4,6 +4,9 @@ import Base.BaseClass;
 import gallows.MenuBar;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import static java.awt.image.ImageObserver.WIDTH;
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -55,7 +58,24 @@ public class DownPanel
 
     public void createButtons()
     {
-        
+        char letter = 'A';
+        JButton dugme;
+        for (int i = 1; i <= 26; i++) 
+        {
+            dugme = new JButton(String.valueOf(letter++));
+            dugme.setFont(new Font("Kristen ITC", Font.PLAIN, 20));
+            dugme.setBackground(Color.GREEN);
+            this.downPanel.add(dugme);
+            
+            dugme.addMouseListener(new MouseAdapter() 
+            {
+                @Override
+                public void mouseClicked(MouseEvent e) 
+                {
+                    letterClick((JButton)e.getSource());
+                }
+            });
+        }
     }
 
     /**
