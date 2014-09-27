@@ -2,12 +2,20 @@
 package Panels;
 
 import Base.BaseClass;
+import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.MenuBar;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 
 /**
  *
@@ -24,6 +32,56 @@ public class UpPanel
     private MenuBar myMenubar;
     
     public UpPanel(BaseClass base)
+    {
+        this.baseWord = base;
+        
+        panel.setLayout(new BorderLayout(5,5));
+        
+        JPanel imagePanel = new JPanel();
+        imagePanel.setLayout(new BorderLayout(5, 5));
+        imagePanel.setBackground(Color.WHITE);
+        image = new JLabel(new ImageIcon("src/Content/Stickman/image.PNG"));
+        image.setVerticalAlignment(SwingConstants.CENTER);
+        imagePanel.add(image, BorderLayout.CENTER);
+        
+        panel.add(imagePanel, BorderLayout.CENTER);
+        
+        JPanel userPanel = new JPanel();
+        userPanel.setLayout(new BorderLayout(5,5));
+        
+        JLabel labela = new JLabel("Type Your word");
+        labela.setFont(new Font("Kristen ITC", Font.PLAIN, 18));
+        labela.setHorizontalAlignment(SwingConstants.CENTER);
+        userPanel.add(labela, BorderLayout.NORTH);
+        
+        txtWord = new JTextField();
+        txtWord.setFont(new Font("Kristen ITC", Font.PLAIN, 18));
+        txtWord.setHorizontalAlignment(SwingConstants.CENTER);
+        
+        txtWord.addKeyListener(new KeyAdapter() 
+        {
+            @Override
+            public void keyPressed(KeyEvent e) 
+            {
+                chackLenght();
+            }
+            
+            @Override
+            public void keyReleased(KeyEvent e) 
+            {
+                capsLockLetter();
+            }
+	});
+        
+        userPanel.add(txtWord, BorderLayout.CENTER);
+        
+    }
+    
+    public void chackLenght()
+    {
+    }
+    
+    public void capsLockLetter() 
     {
     }
 

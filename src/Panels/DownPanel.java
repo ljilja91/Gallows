@@ -8,7 +8,10 @@ import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import static java.awt.image.ImageObserver.WIDTH;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -53,7 +56,53 @@ public class DownPanel
     
     public void letterClick(JButton button)
     {
+        button.setVisible(false);
         
+        if(getBase().getWord().contains(button.getText()))
+        {
+            
+        }
+        else
+        {
+            int misses = this.getNumberOfMiss();
+            this.setNumberOfMiss(++misses);
+            
+            switch(this.getNumberOfMiss()) 
+            {
+                case 1:
+                {
+                    this.upPanel.setImage("src/Content/Stickman/image1.png");
+                    break;
+                }
+                case 2:
+                {
+                    this.upPanel.setImage("src/Content/Stickman/image2.png");
+                    break;
+                }
+                case 3:
+                {
+                    this.upPanel.setImage("src/Content/Stickman/image3.png");
+                    break;
+                }
+                case 4:
+                {
+                    this.upPanel.setImage("src/Content/Stickman/image4.png");
+                    break;
+                }
+                case 5:
+                {
+                    this.upPanel.setImage("src/Content/Stickman/image5.png");
+                    break;
+                }
+                case 6:
+                {
+                    this.upPanel.setImage("src/Content/Stickman/image6.png");
+                    this.upPanel.setWord(this.base.getWord());
+                    
+                    break;
+                }
+            }
+        }
     }
 
     public void createButtons()
