@@ -107,7 +107,30 @@ public class MenuBar extends JMenuBar
 
     private void chackBoxClick(ActionEvent e) 
     {
-        
+        if(((JCheckBoxMenuItem)e.getSource()).getText() == "Scientists")
+        {
+            getJcbScientists().setSelected(true);
+            getJcbSports().setSelected(false);
+            getJcbSingers().setSelected(false);
+            
+            this.type = 1;
+        }
+        else if(((JCheckBoxMenuItem)e.getSource()).getText() == "Sports")
+        {
+            getJcbScientists().setSelected(false);
+            getJcbSports().setSelected(true);
+            getJcbSingers().setSelected(false);
+            
+            this.type = 2;
+        }
+        else
+        {
+            getJcbScientists().setSelected(false);
+            getJcbSports().setSelected(false);
+            getJcbSingers().setSelected(true);
+            
+            this.type = 3;
+        }
     }
     
     public void newGameClicked()

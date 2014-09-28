@@ -8,10 +8,7 @@ import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import static java.awt.image.ImageObserver.WIDTH;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -22,9 +19,9 @@ public class DownPanel
 {
     private JPanel downPanel = new JPanel();
     private UpPanel upPanel;
-    private BaseClass base;
-    
     private MenuBar myMenuBar;
+    private BaseClass base;
+    private String regex = "[^ ]";
     
     private int numberOfMiss=0;
     
@@ -60,7 +57,13 @@ public class DownPanel
         
         if(getBase().getWord().contains(button.getText()))
         {
+            setRegex(getRegex().substring(0, getRegex().length() - 1));
+            setRegex(getRegex() + ",^" + button.getText() + "]");
             
+            String testString = getBase().getWord();
+            testString = testString.replaceAll(getRegex(), "?");
+            
+            this.upPanel.setWord(testString);
         }
         else
         {
@@ -141,6 +144,20 @@ public class DownPanel
         this.base = base;
     }
 
+    /**
+     * @return the regex
+     */
+    public String getRegex() {
+        return regex;
+    }
+
+    /**
+     * @param regex the regex to set
+     */
+    public void setRegex(String regex) {
+        this.regex = regex;
+    }
+    
     /**
      * @return the myMenuBar
      */
