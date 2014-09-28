@@ -104,15 +104,25 @@ public class UpPanel
     
     public void chackLenght()
     {
+        int lenghtWord = getBaseWord().getWord().length();
+        if(txtWord.getText().length() >= lenghtWord)
+        {
+            String test = txtWord.getText().substring(0, txtWord.getText().length()-1);
+            txtWord.setText(test);
+        }
     }
     
     public void capsLockLetter() 
     {
+        this.txtWord.setText(this.txtWord.getText().toUpperCase());
     }
     
     public void chackWord(MouseEvent e)
     {
+        if(getTxtWord().getText().equals(this.getBaseWord().getWord()))
+        {
         
+        }
     }
 
     /**
