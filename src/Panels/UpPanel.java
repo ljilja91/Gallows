@@ -75,6 +75,20 @@ public class UpPanel
         
         userPanel.add(txtWord, BorderLayout.CENTER);
         
+        JButton btnChackWord = new JButton("Chack word");
+        btnChackWord.setFont(new Font("Kristen ITC", Font.PLAIN, 18));
+        btnChackWord.addMouseListener(new MouseAdapter() 
+        {
+	    @Override
+	    public void mouseClicked(MouseEvent arg0) 
+            {
+                chackWord(arg0);
+	    }
+	});
+        
+        userPanel.add(btnChackWord, BorderLayout.SOUTH);
+        
+        panel.add(userPanel, BorderLayout.NORTH);
     }
     
     public void chackLenght()
@@ -83,6 +97,11 @@ public class UpPanel
     
     public void capsLockLetter() 
     {
+    }
+    
+    public void chackWord(MouseEvent e)
+    {
+        
     }
 
     /**
