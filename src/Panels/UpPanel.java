@@ -88,6 +88,17 @@ public class UpPanel
         
         userPanel.add(btnChackWord, BorderLayout.SOUTH);
         
+        JPanel wordPanel = new JPanel();
+        
+        word = new JLabel();
+        word.setFont(new Font("Kristen ITC", Font.PLAIN, 25));
+        word.setText(base.getWord().replaceAll("[^ ]", "?"));
+                
+        word.setHorizontalAlignment(SwingConstants.CENTER);
+        wordPanel.add(word);
+        
+        panel.add(wordPanel, BorderLayout.SOUTH);
+        
         panel.add(userPanel, BorderLayout.NORTH);
     }
     

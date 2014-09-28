@@ -1,6 +1,14 @@
 
 package Base;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Ljiljana
@@ -9,6 +17,35 @@ public class BaseClass
 {
     protected String word;
 
+    public BaseClass()
+    {
+        BufferedReader reader;
+        try 
+        {
+            reader = new BufferedReader(new FileReader("src/Content/Files/scientists.txt"));
+            
+            Random randomNumber = new Random();
+            int number = randomNumber.nextInt(30);
+                    
+            while((this.word = reader.readLine()) != null)
+            {
+                if(getWord().contains(Integer.toString(number)))
+                {
+                    setWord(getWord().substring(3));
+                    break;
+                }
+            }
+        } 
+        catch (FileNotFoundException ex) 
+        {
+            Logger.getLogger(BaseClass.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+        catch (IOException ex) 
+        {
+            Logger.getLogger(BaseClass.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     /**
      * @return the word
      */
