@@ -20,7 +20,7 @@ import javax.swing.JPanel;
  */
 public class DownPanel
 {
-    private JPanel downPanel = new JPanel();
+    private JPanel downPanel = new JPanel(); //osnovni panel
     private UpPanel upPanel;
     private MenuBar myMenuBar;
     private BaseClass base;
@@ -28,11 +28,15 @@ public class DownPanel
     
     private int numberOfMiss=0;
     
+    /**
+     * 
+     * @param base komunicira sa bazom radi rijeci koja se pogadja
+     * @param upPanel potrebna je svijest o gornjem panelu radi eventualnih izmjena
+     */
     public DownPanel(BaseClass base, UpPanel upPanel)
     {
         downPanel.setBackground(Color.yellow);
-        downPanel.setMinimumSize(new Dimension(WIDTH, 160));
-        downPanel.setPreferredSize(new Dimension(WIDTH, 160));
+        downPanel.setPreferredSize(new Dimension(WIDTH, 160)); //postavljanje duzine panela a visina se postvlja fiksno na 160
         
         createButtons();
         
@@ -54,22 +58,38 @@ public class DownPanel
         this.downPanel = downPanel;
     }
     
+    /**
+     * Funkcija obradjuje slucaj kada je kliknuto neko dugme.
+     * 
+     * @param button dugme koje je kliknuto
+     */
     public void letterClick(JButton button)
     {
-        button.setVisible(false);
+        button.setVisible(false); //uklanjamo dugme sa panela
         
         if(getBase().getWord().contains(button.getText()))
         {
+            /*
+            Uklanjamo zadnji karakter iz regexa, tacnije uklanja se ']'
+            */
             setRegex(getRegex().substring(0, getRegex().length() - 1));
+            /*
+            Kreiramo novi regex na osnovu postojećeg. U kojemo postavljamo takav string da će se 
+            u kasnijoj zamjeni zamjeniti svi karakteri koji nisu razmak i oni karakteri koji su jednaki
+            slovu koje se nalazi na dugmetu koje je klinuto.
+            */
             setRegex(getRegex() + ",^" + button.getText() + "]");
             
             String testString = getBase().getWord();
-            testString = testString.replaceAll(getRegex(), "?");
+            testString = testString.replaceAll(getRegex(), "?"); //kreiramo novu rijec koja ce se pojaviti na korisnickom panelu
             
-            this.upPanel.setWord(testString);
+            this.upPanel.setWord(testString); //postavljamo novu rijec na panel
         }
         else
         {
+            /*
+            Povecavamo i postavljamo novu vrijednost promasaja.
+            */
             int misses = this.getNumberOfMiss();
             this.setNumberOfMiss(++misses);
             
@@ -105,25 +125,29 @@ public class DownPanel
                     this.upPanel.setWord(this.base.getWord());
                     
                     this.upPanel.setImage("src/Content/Stickman/image6.png");
-                    JLabel lblWIn = new JLabel("Ooooh, You Lose!!!");
+                    JLabel lblWIn = new JLabel("Ooooh, You Lose!!!"); //tekst poruke koji se ispisuje u slusaju gubitka
                     lblWIn.setForeground(Color.magenta);
-                    lblWIn.setFont(new Font("Kristen ITC", Font.PLAIN, 15));
+                    lblWIn.setFont(new Font("Kristen ITC", Font.PLAIN, 15)); //inicijalizacija fonta
                     
-                    ImageIcon icon = new ImageIcon("src/Content/Images/loseGame.png");
+                    ImageIcon icon = new ImageIcon("src/Content/Images/loseGame.png"); //slicica koja se prikazuje korisniku
                     
-                    Object buttonArray[] = {"New game", "EXIT"};
+                    Object buttonArray[] = {"New game", "EXIT"}; //definisemo niz objekata sa njohovim sadrzajem koji je tekst
         
+                    /*
+                    Korisniku prikazujemo opcioni panel i kupimo njegov odogovor u promjenjivu
+                    response.
+                    */
                     int response = JOptionPane.showOptionDialog(null, lblWIn, "Gallows", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, 
                     icon, buttonArray, buttonArray[0]);
                     
                     if(response == JOptionPane.YES_OPTION)
                     {
-                        this.myMenuBar.newGameClicked();
+                        this.myMenuBar.newGameClicked(); //odgovor je potvrdan, kreće nova igra
                         return;
                     }
                     else
                     {
-                        System.exit(0);
+                        System.exit(0); //KRAJ PROGRAMA
                     }
                     
                     break;
@@ -132,13 +156,19 @@ public class DownPanel
         }
     }
 
+    /**
+     * Funkcija kreira dugmad koja dodaje na donji panel.
+     * Kreira se osluškivač na dugme. 
+     * Kreira se 26 dugmadi sa sadrzajem sacinjenih od slova engleskog alfabeta.
+     */
     public void createButtons()
     {
         char letter = 'A';
         JButton dugme;
         for (int i = 1; i <= 26; i++) 
         {
-            dugme = new JButton(String.valueOf(letter++));
+            dugme = new JButton(String.valueOf(letter++)); //postavljamo sadrzaj dugmeta. Konvertujemo cijelobrojnu vrijednost u string.
+            //kasnije se povecava vrijednost slova
             dugme.setFont(new Font("Kristen ITC", Font.PLAIN, 20));
             dugme.setBackground(Color.GREEN);
             this.downPanel.add(dugme);
