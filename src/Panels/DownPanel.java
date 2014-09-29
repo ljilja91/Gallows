@@ -8,7 +8,10 @@ import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import static java.awt.image.ImageObserver.WIDTH;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -99,8 +102,29 @@ public class DownPanel
                 }
                 case 6:
                 {
-                    this.upPanel.setImage("src/Content/Stickman/image6.png");
                     this.upPanel.setWord(this.base.getWord());
+                    
+                    this.upPanel.setImage("src/Content/Stickman/image6.png");
+                    JLabel lblWIn = new JLabel("Ooooh, You Lose!!!");
+                    lblWIn.setForeground(Color.magenta);
+                    lblWIn.setFont(new Font("Kristen ITC", Font.PLAIN, 15));
+                    
+                    ImageIcon icon = new ImageIcon("src/Content/Images/loseGame.png");
+                    
+                    Object buttonArray[] = {"New game", "EXIT"};
+        
+                    int response = JOptionPane.showOptionDialog(null, lblWIn, "Gallows", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, 
+                    icon, buttonArray, buttonArray[0]);
+                    
+                    if(response == JOptionPane.YES_OPTION)
+                    {
+                        this.myMenuBar.newGameClicked();
+                        return;
+                    }
+                    else
+                    {
+                        System.exit(0);
+                    }
                     
                     break;
                 }

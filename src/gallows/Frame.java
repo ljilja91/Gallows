@@ -35,6 +35,8 @@ public class Frame extends JFrame
         
         meni = new MenuBar(upPanel, downPanel);
         
+        this.upPanel.setMyMenubar(meni);
+        
         this.downPanel.setMyMenuBar(meni);
         
         createMainPanel(); 
@@ -72,7 +74,7 @@ public class Frame extends JFrame
         this.setResizable(true);
         this.setType(Type.NORMAL);
         
-        Dimension dimensionWindow = new Dimension(500, 400);
+        Dimension dimensionWindow = new Dimension(700, 550);
         
         this.setSize(mainPanel.getWidth(), mainPanel.getHeight());
         
