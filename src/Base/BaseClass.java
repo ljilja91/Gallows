@@ -23,10 +23,43 @@ public class BaseClass
      */
     public BaseClass()
     {
+        this.generateWord("src/Content/Files/scientists.txt");
+    }
+    
+    /**
+     * Konstruktor koji se poziva u trenutku kada se učitava nova igra.
+     * Prima parametar @menu kojim se razgranicava koji će se od tri fajla čitati.
+     * 
+     * @param menu tip po kojem se zna koji fajl se cita
+     */
+    public BaseClass(int menu)
+    {
+        if(menu == 1)
+        {
+            this.generateWord("src/Content/Files/scientists.txt");
+        }
+        else if(menu == 2)
+        {
+            this.generateWord("src/Content/Files/sports.txt");
+        }
+        else
+        {
+            this.generateWord("src/Content/Files/singers.txt");
+        }
+    } 
+    
+    /**
+     * Funkcija na osnovu lokacije i slucajno izabranog broja otvara fajl i iz
+     * njega pronalazi rijec koja se poklapa sa generisanim brojem.
+     * 
+     * @param location lokacija od fajla iz kojeg ce se nasumicno izvuci slucjana rijec
+     */
+    private void generateWord(String location)
+    {
         BufferedReader reader;
         try 
         {
-            reader = new BufferedReader(new FileReader("src/Content/Files/scientists.txt"));
+            reader = new BufferedReader(new FileReader(location));
             
             Random randomNumber = new Random(); //klasa koja radi sa slucajnim brojevima
             int number = randomNumber.nextInt(30); //program nam vrati nasumicno generisan broj od 1 do 30
@@ -36,7 +69,7 @@ public class BaseClass
                 if(getWord().contains(Integer.toString(number))) //provjeravamo da li rijec do koje smo stigli citanje sadrzi slucajno izabran broj
                 {
                     setWord(getWord().substring(3)); //odbijamo prva tri karaktera od pocetka
-                    break;
+                    break; //prekida se dalje izvrsavanje jer nema smisla ici do kraja fajla ako smo pronasli trazenu rijec
                 }
             }
         } 
@@ -49,51 +82,6 @@ public class BaseClass
             Logger.getLogger(BaseClass.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    /**
-     * Konstruktor koji se poziva u trenutku kada se učitava nova igra.
-     * Prima parametar @menu kojim se razgranicava koji će se od tri fajla čitati.
-     * 
-     * @param menu tip po kojem se zna koji fajl se cita
-     */
-    public BaseClass(int menu)
-    {
-        BufferedReader reader;
-        try 
-        {
-            if(menu == 1)
-            {
-                reader = new BufferedReader(new FileReader("src/Content/Files/scientists.txt"));
-            }
-            else if(menu == 2)
-            {
-                reader = new BufferedReader(new FileReader("src/Content/Files/sports.txt"));
-            }
-            else
-            {
-                reader = new BufferedReader(new FileReader("src/Content/Files/singers.txt"));
-            }
-            
-            Random randomNumber = new Random();
-            int number = randomNumber.nextInt(30);
-                    
-            while((this.word = reader.readLine()) != null)
-            {
-                if(getWord().contains(Integer.toString(number)))
-                {
-                    setWord(getWord().substring(3));
-                    break;
-                }
-            }
-        } 
-        catch (FileNotFoundException ex) 
-        {
-            Logger.getLogger(BaseClass.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) 
-        {
-            Logger.getLogger(BaseClass.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    } 
     
     /**
      * @return the word
