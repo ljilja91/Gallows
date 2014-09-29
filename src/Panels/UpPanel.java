@@ -32,33 +32,42 @@ public class UpPanel
     
     private MenuBar myMenubar;
     
+    /**
+     * Konstruktor koji kreira gornji panel.
+     * 
+     * @param base panel mora da ima svijest od rijeci koja se pogadja
+     */
     public UpPanel(BaseClass base)
     {
         this.baseWord = base;
         
-        panel.setLayout(new BorderLayout(5,5));
+        panel.setLayout(new BorderLayout(5,5)); //postavlja se izgled kompletnog panela
         
-        JPanel imagePanel = new JPanel();
+        JPanel imagePanel = new JPanel(); //kreiramo imagePanel koji sadrzi labelu u kojoj prikazujemo samo sliku "cikice"
         imagePanel.setLayout(new BorderLayout(5, 5));
         imagePanel.setBackground(Color.WHITE);
-        image = new JLabel(new ImageIcon("src/Content/Stickman/image.PNG"));
-        image.setVerticalAlignment(SwingConstants.CENTER);
-        imagePanel.add(image, BorderLayout.CENTER);
+        image = new JLabel(new ImageIcon("src/Content/Stickman/image.PNG")); //postavljamo osnovu sliku 
+        image.setVerticalAlignment(SwingConstants.CENTER); //postavljamo vertikalno poravnanje
+        imagePanel.add(image, BorderLayout.CENTER); //dodajemo image na imagePanel na centralni dio izgleda 
         
-        panel.add(imagePanel, BorderLayout.CENTER);
+        panel.add(imagePanel, BorderLayout.CENTER); //dodajemo imagePanel na naš glavni gornji panel
         
-        JPanel userPanel = new JPanel();
-        userPanel.setLayout(new BorderLayout(5,5));
+        JPanel userPanel = new JPanel(); //kreiramo korisnicki panel na kojem korisnik ima mogucnost da unese i provjeri rijec 
+        userPanel.setLayout(new BorderLayout(5,5)); //postavljamo izgled korisnickom panelu
         
         JLabel labela = new JLabel("Type Your word");
         labela.setFont(new Font("Kristen ITC", Font.PLAIN, 18));
         labela.setHorizontalAlignment(SwingConstants.CENTER);
-        userPanel.add(labela, BorderLayout.NORTH);
+        userPanel.add(labela, BorderLayout.NORTH); //dodajemo labelu na korisnicki panel
         
-        txtWord = new JTextField();
+        txtWord = new JTextField(); //kreiramo text box za unos teksta
         txtWord.setFont(new Font("Kristen ITC", Font.PLAIN, 18));
         txtWord.setHorizontalAlignment(SwingConstants.CENTER);
         
+        /*
+         * Dodajemo listener za slusaj kada je pritisnuto neko dugme na tastaturi i kada je 
+        otpusteno. 
+         */
         txtWord.addKeyListener(new KeyAdapter() 
         {
             @Override
@@ -76,31 +85,42 @@ public class UpPanel
         
         userPanel.add(txtWord, BorderLayout.CENTER);
         
-        JButton btnChackWord = new JButton("Chack word");
+        JButton btnChackWord = new JButton("Chack word"); //na dugmetu pise sadrzaj Chack word
         btnChackWord.setFont(new Font("Kristen ITC", Font.PLAIN, 18));
+        
+        
+        /*
+        Dodajemo osluskivac na slucaj kada je kliknuto dugme.
+        */
         btnChackWord.addMouseListener(new MouseAdapter() 
         {
 	    @Override
 	    public void mouseClicked(MouseEvent arg0) 
             {
-                chackWord(arg0);
+                chackWord();
 	    }
 	});
         
-        userPanel.add(btnChackWord, BorderLayout.SOUTH);
+        userPanel.add(btnChackWord, BorderLayout.SOUTH); //na korisnicki panel dodajemo dugme ali juzno. 
+        //Postavljamo ga na donju stranu panela.
         
         JPanel wordPanel = new JPanel();
         
         word = new JLabel();
         word.setFont(new Font("Kristen ITC", Font.PLAIN, 25));
+        /*
+        Rijec koju dodajemo na panel postavljamo tako sto pristupimo bazi.
+        Uzmemo datu rijec preko metode getWord() koja nam vraca string i zatim zamjenimo sve karatere
+        u rijeci za znakom ? osim razmaka.
+        */
         word.setText(base.getWord().replaceAll("[^ ]", "?"));
                 
         word.setHorizontalAlignment(SwingConstants.CENTER);
         wordPanel.add(word);
         
-        panel.add(wordPanel, BorderLayout.SOUTH);
+        panel.add(wordPanel, BorderLayout.SOUTH); //dodajemo wordPanel sa rjeci koja se pogadja juzno na kompletan gornji panel
         
-        panel.add(userPanel, BorderLayout.NORTH);
+        panel.add(userPanel, BorderLayout.NORTH); //kompletan korisnicki panel dodajemo na gornju stranu naseg glavnog gornjeg panela
     }
     
     /**
@@ -128,28 +148,34 @@ public class UpPanel
         this.txtWord.setText(this.txtWord.getText().toUpperCase());
     }
     
-    public void chackWord(MouseEvent e)
+    /**
+     * Funkcija provjerava da li je korisnik unio tacnu rijec
+     */
+    public void chackWord()
     {
-        if(getTxtWord().getText().equals(this.getBaseWord().getWord()))
+        if(getTxtWord().getText().equals(this.getBaseWord().getWord())) //slucaj kada je korisnik uniio tacnu rijec 
         {
-            JLabel lblWIn = new JLabel("Congratulations, you are successfully hit a search term" + getBaseWord().getWord());
+            /*
+            Poruka koja se ispisuje korisniku je sastavljena od finksong stringa i rijeca koja se trazila.
+            */
+            JLabel lblWIn = new JLabel("Congratulations, you are successfully hit a search term " + getBaseWord().getWord()); 
             lblWIn.setForeground(Color.magenta);
             lblWIn.setFont(new Font("Kristen ITC", Font.PLAIN, 15));
         
-            ImageIcon icon = new ImageIcon("src/Content/Images/star.png");
+            ImageIcon icon = new ImageIcon("src/Content/Images/star.png"); //postavlja se pobjednicka slicica
             
-            Object buttonArray[] = {"New game", "EXIT"};
+            Object buttonArray[] = {"New game", "EXIT"}; //definise se niz objekata sa sadrzajem
         
             int response = JOptionPane.showOptionDialog(null, lblWIn, "Gallows", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, 
                     icon, buttonArray, buttonArray[0]);
             
             if (response == JOptionPane.YES_OPTION) 
             {
-                this.getMyMenubar().newGameClicked();
+                this.getMyMenubar().newGameClicked(); //ako korisnik zeli novu igru pokrece se metoda newGameClicked() iz kalse MenuBar
             } 
             else
             {
-                System.exit(0);
+                System.exit(0); //U slucaju negativnog odgovora kraj programa.
             }
         }
     }

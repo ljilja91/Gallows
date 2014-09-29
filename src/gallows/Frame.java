@@ -42,15 +42,15 @@ public class Frame extends JFrame
         
         meni = new MenuBar(upPanel, downPanel);
         
-        this.upPanel.setMyMenubar(meni);
+        this.upPanel.setMyMenubar(meni); //postavljanje menija gornji panel ima svijest o opciji newGame
         
-        this.downPanel.setMyMenuBar(meni);
+        this.downPanel.setMyMenuBar(meni);//postavljanje menija donji panel ima svijest o opciji newGame u slucaju gubitka igre
         
         createMainPanel(); 
         
-        this.setJMenuBar(meni.getMeniBar());
+        this.setJMenuBar(meni.getMeniBar()); //postavlja se meni za kompletan prozor
         
-        this.add(mainPanel);
+        this.add(mainPanel); //glavni panel se dodaje prozoru
         
         frameSettings();
     }
@@ -107,6 +107,9 @@ public class Frame extends JFrame
         Toolkit tkDimension = Toolkit.getDefaultToolkit();
 	Dimension dimensionScrean = tkDimension.getScreenSize();
 
+        /*
+        Postavljamo prozor na sredinu ekrana.
+        */
 	setLocation(dimensionScrean.width / 2 - dimensionWindow.width / 2,
 				dimensionScrean.height / 2 - dimensionWindow.height / 2);
         
@@ -117,7 +120,4 @@ public class Frame extends JFrame
         this.setIconImage(new ImageIcon("src/Content/Images/gallowss.png").getImage());
         this.setVisible(true);
     }
-
-   
-
 }

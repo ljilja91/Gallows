@@ -40,6 +40,9 @@ public class DownPanel
         
         createButtons();
         
+        /*
+        Inicijalizujemo privatna polja preko parametara koja smo doprijemili preko konstruktora.
+        */
         this.upPanel = upPanel;
         this.base = base;
     }
@@ -67,21 +70,21 @@ public class DownPanel
     {
         button.setVisible(false); //uklanjamo dugme sa panela
         
-        if(getBase().getWord().contains(button.getText()))
+        if(getBase().getWord().contains(button.getText())) //u slucaju da se slovo nalazi u rijeci koja se pogadja
         {
             /*
             Uklanjamo zadnji karakter iz regexa, tacnije uklanja se ']'
             */
             setRegex(getRegex().substring(0, getRegex().length() - 1));
             /*
-            Kreiramo novi regex na osnovu postojećeg. U kojemo postavljamo takav string da će se 
+            Kreiramo novi regex na osnovu postojećeg. U kojem postavljamo takav string da će se 
             u kasnijoj zamjeni zamjeniti svi karakteri koji nisu razmak i oni karakteri koji su jednaki
             slovu koje se nalazi na dugmetu koje je klinuto.
             */
             setRegex(getRegex() + ",^" + button.getText() + "]");
             
             String testString = getBase().getWord();
-            testString = testString.replaceAll(getRegex(), "?"); //kreiramo novu rijec koja ce se pojaviti na korisnickom panelu
+            testString = testString.replaceAll(getRegex(), "?"); //kreiramo novu rijec na osnovu novog regexa koja ce se pojaviti na korisnickom panelu
             
             this.upPanel.setWord(testString); //postavljamo novu rijec na panel
         }
@@ -122,7 +125,7 @@ public class DownPanel
                 }
                 case 6:
                 {
-                    this.upPanel.setWord(this.base.getWord());
+                    this.upPanel.setWord(this.base.getWord()); //prikazuje se korisniku trazena rijec u slucaju da je izgubio
                     
                     this.upPanel.setImage("src/Content/Stickman/image6.png");
                     JLabel lblWIn = new JLabel("Ooooh, You Lose!!!"); //tekst poruke koji se ispisuje u slusaju gubitka
@@ -173,6 +176,10 @@ public class DownPanel
             dugme.setBackground(Color.GREEN);
             this.downPanel.add(dugme);
             
+            /*
+            Dodajemo osluskivac na svako dugme.
+            Svakom dugmetu prosljedjujemo metodom kastovanja sadrzaj onog dugmeta koje je kliknuto.
+            */
             dugme.addMouseListener(new MouseAdapter() 
             {
                 @Override
