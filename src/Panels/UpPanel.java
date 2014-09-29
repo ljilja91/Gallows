@@ -103,16 +103,26 @@ public class UpPanel
         panel.add(userPanel, BorderLayout.NORTH);
     }
     
+    /**
+     * Funkcija provjera duzinu unjete rijeci u text box svaki put kada se pritisne neki taster.
+     * Ako je duzina unjete rijeci veca od duzine rijeci koja se trazi stopira se dalji unos.
+     */
     public void chackLenght()
     {
         int lenghtWord = getBaseWord().getWord().length();
         if(txtWord.getText().length() >= lenghtWord)
         {
+            /*
+            Odsjecamo zadnji karakter koji se unosi.
+            */
             String test = txtWord.getText().substring(0, txtWord.getText().length()-1);
             txtWord.setText(test);
         }
     }
     
+    /*
+    Funkcija svaki unjeti karakter pretvara u veliko slovo.
+    */
     public void capsLockLetter() 
     {
         this.txtWord.setText(this.txtWord.getText().toUpperCase());

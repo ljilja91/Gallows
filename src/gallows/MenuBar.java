@@ -42,6 +42,12 @@ public class MenuBar extends JMenuBar
         this.meniBar = meniBar;
     }
     
+    /**
+     * Konstrkutor inicijalizuje parametre i kreira menu sa osnovnim postavkama.
+     * 
+     * @param upPanel gornji panel
+     * @param downPanel donji panel
+     */
     public MenuBar(UpPanel upPanel, DownPanel downPanel)
     {
         this.upPanel = upPanel;
@@ -49,6 +55,7 @@ public class MenuBar extends JMenuBar
         
         meniBar = new JMenuBar();
         
+        //naslov menija
         typeGallows = new JMenu("Type Gallows");
         
         newGame = new JMenuItem("New Game");
@@ -62,8 +69,11 @@ public class MenuBar extends JMenuBar
 	});
         
         typeGallows.add(newGame);
-        typeGallows.addSeparator();
+        typeGallows.addSeparator(); //dodavanje separatora
         
+        /*
+        Inicijalizacija osnovna tri chack boxa.
+        */
         jcbScientists = new JCheckBoxMenuItem("Scientists");
         jcbSports = new JCheckBoxMenuItem("Sports");
         jcbSingers = new JCheckBoxMenuItem("Singers");
@@ -106,6 +116,13 @@ public class MenuBar extends JMenuBar
         meniBar.add(typeGallows);
     }  
 
+    /**
+     * Funkcija postavlja koji je od tri chack boxa cekiran.
+     * Postavlja 
+     * @see #type po kome se razaznaje koji fajl treba citati prilikom pokretanja nove igrice.
+     * 
+     * @param e 
+     */
     private void chackBoxClick(ActionEvent e) 
     {
         if(((JCheckBoxMenuItem)e.getSource()).getText() == "Scientists")
@@ -114,7 +131,7 @@ public class MenuBar extends JMenuBar
             getJcbSports().setSelected(false);
             getJcbSingers().setSelected(false);
             
-            this.type = 1;
+            this.type = 1; //tip su naucnici
         }
         else if(((JCheckBoxMenuItem)e.getSource()).getText() == "Sports")
         {
@@ -122,7 +139,7 @@ public class MenuBar extends JMenuBar
             getJcbSports().setSelected(true);
             getJcbSingers().setSelected(false);
             
-            this.type = 2;
+            this.type = 2; //tip su sportisti
         }
         else
         {
@@ -130,10 +147,22 @@ public class MenuBar extends JMenuBar
             getJcbSports().setSelected(false);
             getJcbSingers().setSelected(true);
             
-            this.type = 3;
+            this.type = 3; //tip su pjevaci
         }
     }
     
+    /**
+     * Funkcija odpocinje novu igru i vrsi inicijalizaciju sljedecih parametara
+     * {@link DownPanel#numberOfMiss}, postavlja se na 0,
+     * {@link UpPanel#image} , postavlja se pocetna slika,
+     * {@link DownPanel#createButtons()} , kreiraju se ponovo sva dugmad,
+     * {@link BaseClass#BaseClass(int)} , poziva se konstruktor za inicijalizaciju nove rijeci na osnovu tipa,
+     * {@link DownPanel#setBase(Base.BaseClass)} , donji panel treba da ima svijest o rijeci koja se pogadja,
+     * {@link DownPanel#setRegex(java.lang.String)} , postavlja se osnovni regex,
+     * {@link UpPanel#setBaseWord(Base.BaseClass)} , gornji panel treba da ima svijest o rijeci koja se pogadja,
+     * {@link UpPanel#setWord(java.lang.String)} , postavlja se trazena rijec na panel sa upitnicima,
+     * {@link UpPanel#setTxtWord(java.lang.String)} , brise se polje za unos rijeci.
+     */
     public void newGameClicked()
     {
         this.doPanel.setNumberOfMiss(0);

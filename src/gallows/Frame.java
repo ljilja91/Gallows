@@ -24,7 +24,14 @@ public class Frame extends JFrame
     private JPanel mainPanel;
     private BaseClass base;
     
-    
+    /**
+     * Osnovni konstruktor koji se koristi pri inicijalizaciji kompletnog frame-a.
+     * Redom se kreiraju sljedeci objekti:
+     * @see #base
+     * @see #upPanel
+     * @see #downPanel
+     * @see #meni
+     */
     public Frame()
     {
         base = new BaseClass();
@@ -48,16 +55,29 @@ public class Frame extends JFrame
         frameSettings();
     }
     
+    /**
+     * Funkcija kreira donji panel i poziva konstruktor
+     * @see DownPanel#DownPanel(Base.BaseClass, Panels.UpPanel) 
+     */
     private void createDownPanel() 
     {
         downPanel = new DownPanel(base, this.upPanel);
     }
 
+    /**
+     * Funkcija kreira gornji panel i poziva konstruktor
+     * @see UpPanel#UpPanel(Base.BaseClass) 
+     */
     private void createUpPanel() 
     {
         upPanel = new UpPanel(base);
     }
 
+    /**
+     * Funkcija kreira glavni panel koji sadrzi
+     * @see #upPanel i
+     * @see #downPanel
+     */
     private void createMainPanel() 
     {
         mainPanel = new JPanel();
@@ -67,11 +87,17 @@ public class Frame extends JFrame
         mainPanel.add(this.downPanel.getDownPanel(), BorderLayout.SOUTH);
     }
     
+    /**
+     * Funkcija postavlja osnovna podešavanja u vezi prozora.
+     */
     private void frameSettings() 
     {
         this.setTitle("Gallows");
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.setResizable(true);
+        /*
+        Dozvoljavaju se sve komande nad prozorom, smanjivanje, maksimiziranje i isključivanje.
+        */
         this.setType(Type.NORMAL);
         
         Dimension dimensionWindow = new Dimension(700, 550);
@@ -85,6 +111,9 @@ public class Frame extends JFrame
 				dimensionScrean.height / 2 - dimensionWindow.height / 2);
         
         this.pack();
+        /*
+        Postavljanje ikonice.
+        */
         this.setIconImage(new ImageIcon("src/Content/Images/gallowss.png").getImage());
         this.setVisible(true);
     }
