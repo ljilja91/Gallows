@@ -2,10 +2,10 @@
 package Panels;
 
 import Base.BaseClass;
+import gallows.MenuBar;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.MenuBar;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
@@ -13,6 +13,7 @@ import java.awt.event.MouseEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -121,7 +122,25 @@ public class UpPanel
     {
         if(getTxtWord().getText().equals(this.getBaseWord().getWord()))
         {
+            JLabel lblWIn = new JLabel("Congratulations, you are successfully hit a search term" + getBaseWord().getWord());
+            lblWIn.setForeground(Color.magenta);
+            lblWIn.setFont(new Font("Kristen ITC", Font.PLAIN, 15));
         
+            ImageIcon icon = new ImageIcon("src/Content/Images/star.png");
+            
+            Object buttonArray[] = {"New game", "EXIT"};
+        
+            int response = JOptionPane.showOptionDialog(null, lblWIn, "Gallows", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, 
+                    icon, buttonArray, buttonArray[0]);
+            
+            if (response == JOptionPane.YES_OPTION) 
+            {
+                this.getMyMenubar().newGameClicked();
+            } 
+            else
+            {
+                System.exit(0);
+            }
         }
     }
 

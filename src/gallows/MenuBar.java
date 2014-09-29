@@ -1,5 +1,6 @@
 package gallows;
 
+import Base.BaseClass;
 import Panels.DownPanel;
 import Panels.UpPanel;
 import java.awt.event.ActionEvent;
@@ -135,9 +136,22 @@ public class MenuBar extends JMenuBar
     
     public void newGameClicked()
     {
+        this.doPanel.setNumberOfMiss(0);
         
+        this.upPanel.setImage("src/Content/Stickman/image.png");
+        
+        this.doPanel.getDownPanel().removeAll();
+        this.doPanel.createButtons();
+        
+        BaseClass newWord = new BaseClass(this.type);
+        this.doPanel.setBase(newWord);
+        
+        this.doPanel.setRegex("[^ ]");
+        
+        this.upPanel.setBaseWord(newWord);
+        this.upPanel.setWord(newWord.getWord().replaceAll("[^ ]", "?"));
+        this.upPanel.setTxtWord("");
     }
-    
     
     /**
      * @return the jcbScientists
